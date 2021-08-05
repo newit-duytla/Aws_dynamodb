@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+
+  aws-webservice:
+    container_name: local_stack
+    image: localstack/localstack:0.12.4
+    environment:
+    - SERVICES=s3,dynamodb, sqs
+    - LAMBDA_EXECUTOR=docker-reuse
+    - START_WEB=false
+    - LAMBDA_REMOTE_DOCKER=false
+    - DATA_DIR=/tmp/localstack/data
+    - EXTRA_CORS_ALLOWED_HEADERS=*
+    volumes:
+    # - './.localstack:/tmp/localstack'
+    - '${TMPDIR:-/tmp/localstack}:/tmp/localstack'
+    ports:
+    - 4566-4580:4566-4580

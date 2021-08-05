@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: custom-sam
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    Runtime: nodejs14.x
+    Timeout: 180
+    MemorySize: 128
+    Environment:
+      Variables:
+        TABLE_NAME: data-table
+Resources:
+  CustomFromLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handler/index.customLambda
+      Description: This is Resource For CustomFromLambdaFunction
+      CodeUri: CustomFromLambdaFunction
